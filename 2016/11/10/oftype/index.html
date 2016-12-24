@@ -1,0 +1,648 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="标量数据类型1.字符串 (string)        字符串有三种定义方式：单引号，双引号，定界符(heredoc);        单引号字符串中出现的变量不会被变量的值替代;        双引号字符串中最重要的一点是其中的变量会被变量值替代;         如果遇到美元符号($),解析器会尽可能多地取得后面的字符以组成一个合法变量名,如果想明确的指定名字的结束，用花括号把变量名括起来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP的类型">
+<meta property="og:url" content="http://lishanggang.com/2016/11/10/oftype/index.html">
+<meta property="og:site_name" content="Shanggang's Blog">
+<meta property="og:description" content="标量数据类型1.字符串 (string)        字符串有三种定义方式：单引号，双引号，定界符(heredoc);        单引号字符串中出现的变量不会被变量的值替代;        双引号字符串中最重要的一点是其中的变量会被变量值替代;         如果遇到美元符号($),解析器会尽可能多地取得后面的字符以组成一个合法变量名,如果想明确的指定名字的结束，用花括号把变量名括起来。">
+<meta property="og:updated_time" content="2016-11-14T12:31:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP的类型">
+<meta name="twitter:description" content="标量数据类型1.字符串 (string)        字符串有三种定义方式：单引号，双引号，定界符(heredoc);        单引号字符串中出现的变量不会被变量的值替代;        双引号字符串中最重要的一点是其中的变量会被变量值替代;         如果遇到美元符号($),解析器会尽可能多地取得后面的字符以组成一个合法变量名,如果想明确的指定名字的结束，用花括号把变量名括起来。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> PHP的类型 | Shanggang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Shanggang's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">前端小生,成长中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP的类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-10T21:34:05+08:00" content="2016-11-10">
+              2016-11-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/10/oftype/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/oftype/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="标量数据类型"><a href="#标量数据类型" class="headerlink" title="标量数据类型"></a>标量数据类型</h2><p>1.字符串 (string)<br>        字符串有三种定义方式：单引号，双引号，定界符(heredoc);<br>        单引号字符串中出现的变量不会被变量的值替代;<br>        双引号字符串中最重要的一点是其中的变量会被变量值替代;<br>         如果遇到美元符号($),解析器会尽可能多地取得后面的字符以组成一个合法变量名,如果想明确的指定名字的结束，用花括号把变量名括起来。</p>
+<p>字符串定界的方法使用定界符语法 “&lt;&lt;&lt;END”<br>        在PHP定界符中的任何特殊字符 都不需要转义<br>        PHP定界符中的PHP变量会被正常的用其值来替换<br>        使用定界符要注意：<br>        结束标识符所在的行不能包含任何其它字符，这意味着该标识符不能被缩进，在分号之前<br>        之后都不能有任何空格或制表符;</p>
+<pre><code> 2.整型(integer)
+
+3.浮点型(float, double)
+
+4.布尔型（bool）
+</code></pre><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">	$a=123;</div><div class="line">$con=&lt;&lt;&lt;END</div><div class="line">	内容内容内容内容</div><div class="line">	内容内容内容内容</div><div class="line">	内容内容内容&#123;$a&#125;内容</div><div class="line">	END;</div><div class="line">	echo &quot;$con&quot;;</div></pre></td></tr></table></figure>
+<h2 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h2><pre><code>1.数组
+$week = array(&apos;星期一&apos;,&apos;星期二&apos;,&apos;星期三&apos;);
+2.对象
+$db = new db;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$arr = array(&apos;星期天&apos;,&apos;a&apos;=&gt;&apos;星期一&apos;,&apos;b&apos;=&gt;&apos;星期二&apos;,&apos;c&apos;=&gt;&apos;星期三&apos;,&apos;星期四&apos;,&apos;星期五&apos;);</div><div class="line">$arr[] = &quot;星期六&quot;;</div><div class="line">print_r($arr);</div></pre></td></tr></table></figure>
+<h2 id="特殊数据类型"><a href="#特殊数据类型" class="headerlink" title="特殊数据类型"></a>特殊数据类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1.资源</div><div class="line">		$fh = fopen(&quot;test.txt&quot;,&quot;r&quot;);</div><div class="line">2.null</div><div class="line">		null 无，表示没有值，null不表示空格，也不表示0;</div><div class="line">		以下情况，则认为是null:</div><div class="line">		</div><div class="line">		没有设置为任何预定义的变量;</div><div class="line">		明确的赋值为null;</div><div class="line">		使用函数unset()清除;</div></pre></td></tr></table></figure>
+<pre><code>$var_1 = 1;
+unset($var_1);             //清除
+echo gettype($var_1); //  输出为 null
+</code></pre><h2 id="类型自动转换"><a href="#类型自动转换" class="headerlink" title="类型自动转换"></a>类型自动转换</h2><pre><code>因为php对于类型定义非常的松散，所以有时会根据引用变量的环境，将变量自动转换为最适合的类型;
+1.    gettype(    )     返回变量的类型
+2.    is_type(    )     查看变量是否属于某个类型,是返回 TRUE ,否返回 FALSE;
+3.    var_dump(    )    函数用来得到变量的类型和值的详细信息
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$num = 123;//integer整数</div><div class="line">$float = 1.1211;//double浮点</div><div class="line">$bol = true;//boolean true false</div><div class="line">$str = &quot;abc&quot;;//string字符串</div><div class="line">$arr = array(10);//array数组</div><div class="line"></div><div class="line">echo gettype($arr);</div><div class="line"></div><div class="line">if (is_array($arr)) &#123;   // 判断是否是数组类型is_array( )</div><div class="line">	echo &quot;对&quot;;</div><div class="line">&#125;else&#123;</div><div class="line">	echo &quot;错&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag">#PHP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/10/canvas2/" rel="next" title="canvas 的基础功能2">
+                <i class="fa fa-chevron-left"></i> canvas 的基础功能2
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/12/操作命令/" rel="prev" title="SQL数据库操作命令">
+                SQL数据库操作命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/10/oftype/"
+           data-title="PHP的类型" data-url="http://lishanggang.com/2016/11/10/oftype/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Li Shanggang" />
+          <p class="site-author-name" itemprop="name">Li Shanggang</p>
+          <p class="site-description motion-element" itemprop="description">热爱学习各项前端技能,目前向ES6模块开发看齐</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标量数据类型"><span class="nav-number">1.</span> <span class="nav-text">标量数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合数据类型"><span class="nav-number">2.</span> <span class="nav-text">复合数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊数据类型"><span class="nav-number">3.</span> <span class="nav-text">特殊数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型自动转换"><span class="nav-number">4.</span> <span class="nav-text">类型自动转换</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Powered By - Li Shanggang</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  Theme -
+  我最喜欢和你这样的人做朋友- Blog
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"794857535"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

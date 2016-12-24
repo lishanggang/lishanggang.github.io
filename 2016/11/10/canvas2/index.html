@@ -1,0 +1,644 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="画多边形  时钟控制deg的角度即可设计多边形,30度为12边,45度为8边,60度为6边
+1234567ctx.beginPath( );for (var i = 0; i &amp;lt; 13; i++) &amp;#123;		deg+=45;		var x = Math.sin(Math.PI/180*deg)*r ;    // r : 圆的半径		var y = -Math.cos(Math.PI/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas 的基础功能2">
+<meta property="og:url" content="http://lishanggang.com/2016/11/10/canvas2/index.html">
+<meta property="og:site_name" content="Shanggang's Blog">
+<meta property="og:description" content="画多边形  时钟控制deg的角度即可设计多边形,30度为12边,45度为8边,60度为6边
+1234567ctx.beginPath( );for (var i = 0; i &amp;lt; 13; i++) &amp;#123;		deg+=45;		var x = Math.sin(Math.PI/180*deg)*r ;    // r : 圆的半径		var y = -Math.cos(Math.PI/">
+<meta property="og:updated_time" content="2016-11-14T12:38:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas 的基础功能2">
+<meta name="twitter:description" content="画多边形  时钟控制deg的角度即可设计多边形,30度为12边,45度为8边,60度为6边
+1234567ctx.beginPath( );for (var i = 0; i &amp;lt; 13; i++) &amp;#123;		deg+=45;		var x = Math.sin(Math.PI/180*deg)*r ;    // r : 圆的半径		var y = -Math.cos(Math.PI/">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> canvas 的基础功能2 | Shanggang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Shanggang's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">前端小生,成长中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-categories " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                canvas 的基础功能2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-10T20:34:05+08:00" content="2016-11-10">
+              2016-11-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">Canvas</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/10/canvas2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/canvas2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="画多边形-时钟"><a href="#画多边形-时钟" class="headerlink" title="画多边形  时钟"></a>画多边形  时钟</h2><p>控制deg的角度即可设计多边形,30度为12边,45度为8边,60度为6边</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath( );</div><div class="line">for (var i = 0; i &lt; 13; i++) &#123;</div><div class="line">		deg+=45;</div><div class="line">		var x = Math.sin(Math.PI/180*deg)*r ;    // r : 圆的半径</div><div class="line">		var y = -Math.cos(Math.PI/180*deg)*r ; // r : 圆的半径		ctx.lineTo(x,y);</div><div class="line">	&#125;</div><div class="line">ctx.closePath( ) ;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="createRadialGradient添加渐变背景"><a href="#createRadialGradient添加渐变背景" class="headerlink" title="createRadialGradient添加渐变背景"></a>createRadialGradient添加渐变背景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var c=ctx.createRadialGradient(x0,y0,r0,x1,y1,r1);  </div><div class="line">// x0 , y0:渐变的开始圆的 x 坐标 和 y 坐标 r0: 开始圆的半径  x1: 渐变结束 x 坐标 y1:渐变结束的 y 坐标  r1:结束圆的半径</div><div class="line">	c.addColorStop(0,&quot;#22f&quot;);</div><div class="line">	c.addColorStop(1,&quot;#0ef&quot;);</div><div class="line">	ctx.fillStyle=c;</div><div class="line">	ctx.fill( ); 填充  //ctx.fillRect( );画矩形使用</div></pre></td></tr></table></figure>
+<h2 id="globalCompositeOperation-”-“属性-背景重叠覆盖问题"><a href="#globalCompositeOperation-”-“属性-背景重叠覆盖问题" class="headerlink" title="globalCompositeOperation=” “属性  背景重叠覆盖问题"></a>globalCompositeOperation=” “属性  背景重叠覆盖问题</h2><p>图形的组合方式:<br>     source-over：为属性globalCompositeOperation属性的默认值表示新图形覆盖在原图形之上<br>    source-atop：只绘制新图形与原图形相重叠的部分，以及原图形其他部分<br>    source-in：只绘制新图形与原图形重叠的部分，新图形与原图形其他部分变透明<br>    source-out：只绘制新图形与原图形不重叠的部分；新图形与原图形其他部分变透明<br>    destination-over：表示原图形覆盖在新图形之上destination-atop：只绘制原图形与新图形相重叠的部分，以及新图形其他部分<br>    destination-in：只绘制原图形与新图形重叠的部分，原图形与新图形其他部分变透明<br>    destination-out：只绘制原图形与新图形不重叠的部分；原图形与新图形其他部分变透明<br>    lighter：原有图形与新图形都绘制，重叠部分加色处理<br>    xor：只绘制原、新图形不重叠之处，其他做透明色<br>    copy：只绘制新图形，覆盖掉原图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">例:ctx.globalCompositeOperation=&quot;source-out&quot;;   //新的覆盖旧的</div></pre></td></tr></table></figure>
+<h2 id="drawImage-把图片绘制在画布上面"><a href="#drawImage-把图片绘制在画布上面" class="headerlink" title="drawImage( )把图片绘制在画布上面"></a>drawImage( )把图片绘制在画布上面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.   ctx.drawImage(img,x,y) ;   //在画布上定位图像：&lt;br&gt;</div><div class="line">2.  ctx.drawImage(img,x,y,width,height);	     //在画布上定位图像，并规定图像的宽度和高度：&lt;br&gt;</div><div class="line">3.  ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); //剪切图像，并在画布上定位被剪切的部分： &lt;br&gt;</div><div class="line">img	规定要使用的图像、画布或视频。 &lt;br&gt;</div><div class="line">sx		可选。开始剪切的 x 坐标位置。 &lt;br&gt;</div><div class="line">sy		可选。开始剪切的 y 坐标位置。&lt;br&gt;</div><div class="line">swidth		可选。被剪切图像的宽度。&lt;br&gt;</div><div class="line">sheight		可选。被剪切图像的高度。&lt;br&gt;</div><div class="line">x		在画布上放置图像的 x 坐标位置。&lt;br&gt;</div><div class="line">y		在画布上放置图像的 y 坐标位置。&lt;br&gt;</div><div class="line">width		可选。要使用的图像的宽度。（伸展或缩小图像）&lt;br&gt;</div><div class="line">height		可选。要使用的图像的高度。（伸展或缩小图像）&lt;br&gt;</div></pre></td></tr></table></figure>
+<h2 id="createPattern-用图片做背景填充-getImageData方法-putImageData方法"><a href="#createPattern-用图片做背景填充-getImageData方法-putImageData方法" class="headerlink" title="createPattern( ) 用图片做背景填充 getImageData方法 putImageData方法"></a>createPattern( ) 用图片做背景填充 getImageData方法 putImageData方法</h2><p>img：图片<br>        type：<br>        repeat整个画布平铺<br>        repeat-x在x轴方向上平铺<br>        repeat-y在y轴方向上平铺<br>        no-repeat不平铺<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.createPattern(image,&quot;repeat|repeat-x|repeat-y|no-repeat&quot;)</div></pre></td></tr></table></figure></p>
+<p>可以把图片作为背景填充<br>var c=ctx.createPattern(img,”no-repeat”);<br>ctx.fillStyle=c;<br>ctx.fillRect( ); //设置背景的大小</p>
+<h2 id="剪切clip"><a href="#剪切clip" class="headerlink" title="剪切clip( )"></a>剪切clip( )</h2><h2 id="获取画板像素点数据-改变图像颜色"><a href="#获取画板像素点数据-改变图像颜色" class="headerlink" title="(获取画板像素点数据,改变图像颜色)"></a>(获取画板像素点数据,改变图像颜色)</h2><p>getImageData方法可以用来读取Canvas的内容，返回一个对象，包含了每个像素的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var imageData = context.getImageData(0, 0, 读取的长度, canvas.height读取的敢赌);</div></pre></td></tr></table></figure></p>
+<p>imageData对象有一个data属性，它的值是一个一维数组。该数组的值，依次是每个像素的红、绿、蓝、alpha通道值，因此该数组的长度等于 图像的像素宽度 x 图像的像素高度 x 4，每个值的范围是0–255。这个数组不仅可读，而且可写，因此通过操作这个数组的值，就可以达到操作图像的目的。修改这个数组以后，使用putImageData方法将数组内容重新绘制在Canvas上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">context.putImageData(imageData, 0, 0); //画在原点0,0</div></pre></td></tr></table></figure></p>
+<h2 id="像素处理-通过getImageData方法和putImageData方法"><a href="#像素处理-通过getImageData方法和putImageData方法" class="headerlink" title="像素处理 , 通过getImageData方法和putImageData方法"></a>像素处理 , 通过getImageData方法和putImageData方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var img=new Image( );</div><div class="line">img.src=&quot;mycar.png&quot;</div><div class="line">img.onload = function ( ) &#123;</div><div class="line">	ctx.drawImage(img,0,0);</div><div class="line">	//获取画板像素点数据</div><div class="line">	var ImageData = ctx.getImageData(0,0,100,203);</div><div class="line">	//改变for循环可以改变颜色</div><div class="line">	for (var i = 0; i &lt; ImageData.data.length; i+=4) &#123;</div><div class="line">		ImageData.data[i] = 255-ImageData.data[i];</div><div class="line">		ImageData.data[i+1] = 255-ImageData.data[i+1];</div><div class="line">		ImageData.data[i+2] = 255-ImageData.data[i+2];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	ctx.putImageData(ImageData,0,0)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>会灰色效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; d.length; i += 4) &#123;</div><div class="line">     var r = d[i];</div><div class="line">     var g = d[i + 1];</div><div class="line">     var b = d[i + 2];</div><div class="line">     d[i] = d[i + 1] = d[i + 2] = (r+g+b)/3;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>变复古,金黄色<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; d.length; i += 4) &#123;</div><div class="line">     var r = d[i];</div><div class="line">     var g = d[i + 1];</div><div class="line">     var b = d[i + 2];</div><div class="line">     d[i]     = (r * 0.393)+(g * 0.769)+(b * 0.189); // red</div><div class="line">     d[i + 1] = (r * 0.349)+(g * 0.686)+(b * 0.168); // green</div><div class="line">     d[i + 2] = (r * 0.272)+(g * 0.534)+(b * 0.131); // blue</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//颜色反转</div><div class="line">for (var i = 0; i &lt; d.length; i += 4) &#123;</div><div class="line">		d[i] = 255 - d[i];</div><div class="line">		d[i+1] = 255 - d[i + 1];</div><div class="line">		d[i+2] = 255 - d[i + 2];</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="canvas-toDataURL-“image-png”-把画布里的图片路径赋值给画布外的图片"><a href="#canvas-toDataURL-“image-png”-把画布里的图片路径赋值给画布外的图片" class="headerlink" title="canvas.toDataURL(“image/png”) 把画布里的图片路径赋值给画布外的图片"></a>canvas.toDataURL(“image/png”) 把画布里的图片路径赋值给画布外的图片</h2><p>获取外面图片<img>的像素点数据后,更换颜色再赋值回图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var url = canvas.toDataURL(&quot;image/png&quot;);</div><div class="line">img.src = url</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag">#PHP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/10/canvas基础/" rel="next" title="什么是canvas (基础1)">
+                <i class="fa fa-chevron-left"></i> 什么是canvas (基础1)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/10/oftype/" rel="prev" title="PHP的类型">
+                PHP的类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/10/canvas2/"
+           data-title="canvas 的基础功能2" data-url="http://lishanggang.com/2016/11/10/canvas2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Li Shanggang" />
+          <p class="site-author-name" itemprop="name">Li Shanggang</p>
+          <p class="site-description motion-element" itemprop="description">热爱学习各项前端技能,目前向ES6模块开发看齐</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#画多边形-时钟"><span class="nav-number">1.</span> <span class="nav-text">画多边形  时钟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#createRadialGradient添加渐变背景"><span class="nav-number">2.</span> <span class="nav-text">createRadialGradient添加渐变背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#globalCompositeOperation-”-“属性-背景重叠覆盖问题"><span class="nav-number">3.</span> <span class="nav-text">globalCompositeOperation=” “属性  背景重叠覆盖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drawImage-把图片绘制在画布上面"><span class="nav-number">4.</span> <span class="nav-text">drawImage( )把图片绘制在画布上面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#createPattern-用图片做背景填充-getImageData方法-putImageData方法"><span class="nav-number">5.</span> <span class="nav-text">createPattern( ) 用图片做背景填充 getImageData方法 putImageData方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪切clip"><span class="nav-number">6.</span> <span class="nav-text">剪切clip( )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取画板像素点数据-改变图像颜色"><span class="nav-number">7.</span> <span class="nav-text">(获取画板像素点数据,改变图像颜色)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#像素处理-通过getImageData方法和putImageData方法"><span class="nav-number">8.</span> <span class="nav-text">像素处理 , 通过getImageData方法和putImageData方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#canvas-toDataURL-“image-png”-把画布里的图片路径赋值给画布外的图片"><span class="nav-number">9.</span> <span class="nav-text">canvas.toDataURL(“image/png”) 把画布里的图片路径赋值给画布外的图片</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Powered By - Li Shanggang</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  Theme -
+  我最喜欢和你这样的人做朋友- Blog
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"794857535"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

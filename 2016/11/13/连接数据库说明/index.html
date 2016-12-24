@@ -1,0 +1,688 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##一、编程接口——————————
+从PHP5开始，PHP向程序员提供了两种MySQL应用程序编程接口:一种是从PHP早期版本一
+直就有的mysql功能模块;另一种是从PHP5才开始有的mysqli接口;    mysql功能模块不是PHP的一个集成组件。要想使用这个功能扩展模块，不管使用是哪一种操作系统，都必须在php.ini文件里启用这个扩展以确保PHP能够找到所有必要的DLL “php_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="连接MySQL服务器步骤">
+<meta property="og:url" content="http://lishanggang.com/2016/11/13/连接数据库说明/index.html">
+<meta property="og:site_name" content="Shanggang's Blog">
+<meta property="og:description" content="##一、编程接口——————————
+从PHP5开始，PHP向程序员提供了两种MySQL应用程序编程接口:一种是从PHP早期版本一
+直就有的mysql功能模块;另一种是从PHP5才开始有的mysqli接口;    mysql功能模块不是PHP的一个集成组件。要想使用这个功能扩展模块，不管使用是哪一种操作系统，都必须在php.ini文件里启用这个扩展以确保PHP能够找到所有必要的DLL “php_">
+<meta property="og:updated_time" content="2016-11-14T12:45:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="连接MySQL服务器步骤">
+<meta name="twitter:description" content="##一、编程接口——————————
+从PHP5开始，PHP向程序员提供了两种MySQL应用程序编程接口:一种是从PHP早期版本一
+直就有的mysql功能模块;另一种是从PHP5才开始有的mysqli接口;    mysql功能模块不是PHP的一个集成组件。要想使用这个功能扩展模块，不管使用是哪一种操作系统，都必须在php.ini文件里启用这个扩展以确保PHP能够找到所有必要的DLL “php_">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 连接MySQL服务器步骤 | Shanggang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Shanggang's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">前端小生,成长中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-categories " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                连接MySQL服务器步骤
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-13T20:34:05+08:00" content="2016-11-13">
+              2016-11-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/13/连接数据库说明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/13/连接数据库说明/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> ##一、编程接口——————————</p>
+<pre><code>从PHP5开始，PHP向程序员提供了两种MySQL应用程序编程接口:一种是从PHP早期版本一
+</code></pre><p>直就有的mysql功能模块;另一种是从PHP5才开始有的mysqli接口;<br>    mysql功能模块不是PHP的一个集成组件。要想使用这个功能扩展模块，不管使用是哪一种操作系统，都必须在php.ini文件里启用这个扩展以确保PHP能够找到所有必要的DLL “php_mysqli”。</p>
+<pre><code>phpinfo();//查看php.ini设置，包括路径
+</code></pre><p> ##二、数据库操作一般步骤<br>    1.MySQL建立连接与选择要操作的数据库<br>    2.进行增删改查操作<br>    3.关闭连接 close</p>
+<a id="more"></a>
+<p> ##三、连接MySQL服务器<br>    用mysqli_connect或者new mysqli方法连接数据库</p>
+<p>如果连接成功，这个函数将返回一个对象。否则将返回FALSE,并向Web服务器发送一条出错消息，如果不想让最终用户在他们的web浏览器里看到这样的出错消息，就必须在函数前面加上一个@字符。</p>
+<p>设置获取数据库的数据编码格式</p>
+<pre><code>$conn-&gt;query(&apos;set names utf8&apos;);
+mysqli_query($conn,&apos;set names utf8&apos;);
+</code></pre><p> ##四、执行SQL语句<br>    $result = mysqli_query($conn,$sql);<br>    $result = $conn-&gt;query(“SELECT * FROM USER”);</p>
+<p> ##五、获取和显示数据</p>
+<ol>
+<li><p>fetch_row()</p>
+<blockquote>
+<p>将以一个普通数组的形式返回一条结果，它的各个字段需要以$row[n]的方式进行访问。</p>
+</blockquote>
+</li>
+<li><p>fetch_array()</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$arr[&quot;id&quot;]==$arr[0]</div><div class="line">$arr[&quot;id&quot;]==$arr[0]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>将以一个关联数组的形式返回一条结果，它的各个字段需要以$row[n]或$row[“colname”]的方式进行访问。</p>
+</blockquote>
+</li>
+<li><p>fetch_assoc()   使用key</p>
+<blockquote>
+<p>将以一个关联数组的形式返回一条结果记录，但它的各个字段只能以 $row[“colname”]的方式进行访问。  </p>
+</blockquote>
+</li>
+<li><p>fetch_object()    不使用数组<br>$obj-&gt;name    </p>
+<blockquote>
+<p>函数以一个对象的形式返回一条结果记录， 它的各个字段需要以$row-&gt;colname的方式进行访问。 </p>
+<p>这4个函数的共同点是：每次调用将自动返回下一条结果记录,但如果已经到达结果数据表的末尾，则返回FALSE。</p>
+</blockquote>
+</li>
+<li><p>mysqli_ free_result(result)</p>
+<blockquote>
+<p>提前释放某次查询结果</p>
+</blockquote>
+</li>
+<li><p>mysqli_ num_rows($conn)</p>
+<blockquote>
+<p>函数用于获取查询返回的记录数;</p>
+</blockquote>
+</li>
+<li><p>mysqli_ insert_id(conn)</p>
+<blockquote>
+<p>mysql_insert_id()函数用于获取INSERT 操作产生的 ID;</p>
+</blockquote>
+</li>
+<li><p>mysqli_ affected_rows (conn)</p>
+<blockquote>
+<p>函数用于获取前一次 MySQL 操作所影响的记录数 ;</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag">#SQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/12/操作命令/" rel="next" title="SQL数据库操作命令">
+                <i class="fa fa-chevron-left"></i> SQL数据库操作命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/14/连接数据库程序/" rel="prev" title="判断是否连接上sql数据库">
+                判断是否连接上sql数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/13/连接数据库说明/"
+           data-title="连接MySQL服务器步骤" data-url="http://lishanggang.com/2016/11/13/连接数据库说明/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Li Shanggang" />
+          <p class="site-author-name" itemprop="name">Li Shanggang</p>
+          <p class="site-description motion-element" itemprop="description">热爱学习各项前端技能,目前向ES6模块开发看齐</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Powered By - Li Shanggang</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  Theme -
+  我最喜欢和你这样的人做朋友- Blog
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"794857535"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
